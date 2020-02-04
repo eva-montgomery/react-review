@@ -8,20 +8,17 @@ class Counter extends React.Component {
         
         
         this.state = {
-            value: props.initialValue,
-            changeBy: props.changeBy
+            initialValie: props.value,
+            // changeBy: props.changeBy
         };
     }
     render () {
-        // let value = 1;
         return (
             <div>
 
-                <h1>{this.state.value}</h1>
+                <h1>{this.props.value}</h1>
                 <button onClick={this._incrementValue}>+</button>
-
                 <button onClick={this._decrementValue}>-</button>
-                
                 <button onClick={this._resetValue}>*</button>
             </div>
     
@@ -31,22 +28,28 @@ class Counter extends React.Component {
     // write helper functions as arrow function. Arrow functions
     // retain the correct value of the `this` keyword.
     _incrementValue = () => {
-        this.setState({
-            value: this.state.value + this.state.changeBy
+        const newVal = this.props.value + this.props.changeBy;
+        this.props.clickHandler(this.props.index, newVal);
+    
+    //     this.setState({
+    //         value: this.state.value + this.state.changeBy
      
-    });
+    // });
     }
 
     _decrementValue = () => {
-        this.setState({
-            value: this.state.value - this.state.changeBy
-        });
+        const newVal = this.props.value - this.props.changeBy;
+        this.props.clickHandler(this.props.index, newVal);
+        // this.setState({
+        //     value: this.state.value - this.state.changeBy
+        // });
     }
 
     _resetValue = () => {
-        this.setState({
-            value: this.props.initialValue
-        });
+        this.props.clickHandler(this.props.index, this.state.initialValie);
+        // this.setState({
+        //     value: this.props.initialValue
+        // });
 
     }
 
