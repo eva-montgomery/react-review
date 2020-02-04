@@ -13,27 +13,60 @@ class App extends React.Component {
     this.state = { 
       values: [
         7657,
-        99
+        99,
+        33,
+        344354,
+        3423
+      ],
+      changeBy: [
+        2,
+        33,
+        1,
+        1,
+        1
       ]
     };
   }
   render () {
     return (
       <div>
-        <Counter 
-        value={this.state.values[0]}
-        changeBy={2}
-        addHandler={this._incrementAll}
-        subtractHandler={this._decrementAll}
-        index={0}
-        />
-        <Counter 
+
+        {
+
+          this.state.values.map((num, index) => {
+            return (
+              <Counter 
+              key={index}
+              index={index}
+              value={num}
+              addHandler={() => {
+                this._incrementAll(this.state.changeBy[index])
+            }}
+              subtractHandler={() => {
+                this._decrementAll(this.state.changeBy[index])
+              }}
+              resetHandler={this._updateValue}
+              />
+            )
+          })
+ 
+
+
+
+        }
+     
+        {/* <Counter 
         value={this.state.values[1]}
-        changeBy={33}
-        addHandler={this._incrementAll}
-        subtractHandler={this._decrementAll}
+        // changeBy={this.state.changeBy[1]}
+        addHandler={() => {
+          this._incrementAll(this.state.changeBy[1])
+        }}
+          subtractHandler={() => {
+            this._decrementAll(this.state.changeBy[1])
+          }}
+          resetHandler={this._updateValue}
         index={1}
-        />
+        /> */}
         
       </div>
     );
@@ -52,14 +85,14 @@ class App extends React.Component {
         values: newValues
       });
   }
-  _incrementAll = () => {
+  _incrementAll = (howMuch) => {
     const newValues = 
     this.state.values.map(num => num + 1);
     this.setState({
       values: newValues
     })
   } 
-  _decrementAll = () => {
+  _decrementAll = (howMuch) => {
     const newValues = 
     this.state.values.map(num => num - 1);
     this.setState({
